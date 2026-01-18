@@ -12,15 +12,6 @@ dist
 dist-ssr
 *.local
 
-#newly added file names
-tsconfig.json
-tsconfig.node.json
-vite.config.ts
-eslint.config.js
-tsconfig.app.json
-package-lock.json
-package.json
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
