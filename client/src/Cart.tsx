@@ -187,13 +187,9 @@ const Wrapper = styled.section<{ theme?: MyTheme }>`
 
 const Cart: React.FC = () => {
   return (
-    <Wrapper>
-      <div className="container">
-        <div className="product-data">
-          {/* Example content */}
-        </div>
-      </div>
-    </Wrapper>
+    <div>
+      Cart
+    </div>
   )
 }
 

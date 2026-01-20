@@ -1,24 +1,8 @@
 import { createGlobalStyle } from "styled-components";
+import type { DefaultTheme } from "styled-components";
 
-interface MyTheme{
-  colors:{
-    heading:string,
-    text:string,
-    bg:string,
-    black:string,
-    helper:string,
-    white:string,
-    btn:string,
-    shadowSupport:string,
-    border:string,
-  },
-  media:{
-    tab:string,
-    mobile:string
-  }
-}
 
-export const GlobalStyle = createGlobalStyle<{theme?:MyTheme}>`
+export const GlobalStyle = createGlobalStyle<{theme?:DefaultTheme}>`
 
 * {
   margin: 0;

@@ -87,14 +87,17 @@ const Wrapper = styled.section<{ theme?: MyTheme }>`
 
 const SingleProduct = () => {
   return (
+    <>
     <Wrapper>
       {/* Your content goes here */}
       <div className="container">
         <div className="product-data">
-           {/* Example content */}
+          {/* Example content */}
+          SingleProduct
         </div>
       </div>
     </Wrapper>
+    </>
   );
 };
 
