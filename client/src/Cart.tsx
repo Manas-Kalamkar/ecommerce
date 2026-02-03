@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { useCartContext } from "./context/CartContext";
+import CartItem from "./components/CartItem";
+import { Button } from "./styles/Button";
+import { NavLink } from "react-router";
 
 interface MyTheme {
   colors: {
@@ -8,6 +12,61 @@ interface MyTheme {
     mobile: string;
   }
 }
+
+const Cart: React.FC = () => {
+  const { total_amount, total_item, cart, clearCart } = useCartContext();
+
+  if (cart.length === 0) {
+    return (
+      <EmptyDiv>
+        <h3>
+          No items in Cart
+
+        </h3>
+      </EmptyDiv>)
+  }
+
+
+  console.log("total_amount: ", total_amount, "total item: ", total_item, "cart: ", cart)
+  return (
+
+    <Wrapper>
+      <div className="container">
+        <div className="cart_heading grid grid-five-column">
+          <p>Item</p>
+          <p className="cart-hide">Price</p>
+          <p>Quantity</p>
+          <p className="cart-hide">Subtotal</p>
+          <p>Remove</p>
+        </div>
+        <hr />
+
+        <div className="cart-item">
+          {cart.map((curElem) => {
+            return <CartItem key={curElem.id} {...curElem} />;
+          })}
+        </div>
+        <hr />
+        <div className="cart-two-button">
+          <NavLink to="/products">
+            <Button>continue Shopping</Button>
+          </NavLink>
+          <Button className="btn btn-clear" onClick={clearCart} >Clear Cart</Button>
+        </div>
+      </div>
+    </Wrapper>
+  )
+}
+
+const EmptyDiv = styled.div`
+display:grid;
+place-items:center;
+height:50vw;
+
+h3{
+font-size:4.2rem;
+text-transform:capitalize 
+font-weight:300}`
 
 const Wrapper = styled.section<{ theme?: MyTheme }>`
 .container{
@@ -185,12 +244,5 @@ const Wrapper = styled.section<{ theme?: MyTheme }>`
   }
 `;
 
-const Cart: React.FC = () => {
-  return (
-    <div>
-      Cart
-    </div>
-  )
-}
 
 export default Cart;
