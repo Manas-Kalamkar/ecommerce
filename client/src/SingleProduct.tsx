@@ -1,22 +1,130 @@
+import { useEffect } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
+import { useProductContext } from "./context/ProductContext";
+import type { product, ProductContextType } from "./types";
+import PageNavigation from "./components/PageNavigation";
+import { Container } from "./styles/Container";
+import FormatPrice from "./Helpers/FormatPrice";
+import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+import { MdSecurity } from "react-icons/md";
+import MyImage from "./components/MyImage";
+import Star from "./components/Star";
+import AddToCart from "./components/AddToCart";
+
+
+
+const API = "https://fakestoreapi.com/products/"
+
+const SingleProduct = () => {
+  const { getSingleProduct, isSingleLoading, singleProduct }: ProductContextType = useProductContext();
+
+  const {
+    id: alias,
+    title,
+    price,
+    description,
+    category,
+    image,
+    rating: { rate, count }
+
+  }: product = singleProduct;
+
+  const { id } = useParams();
+  useEffect(() => {
+    getSingleProduct(`${API}/${id}`)
+  }, [])
+
+  if (isSingleLoading) { return (<div>...Loading...</div>) }
+
+  return (
+    <>
+      <Wrapper>
+        <PageNavigation title={singleProduct.title} />
+        {/* Your content goes here */}
+        <Container >
+          <div className="grid grid-two-column">
+            {/* product Images  */}
+            <div className="product_images">
+              <MyImage imgs={image} />
+            </div>
+
+            {/* product dAta  */}
+            <div className="product-data">
+              <h2>{title}</h2>
+              <Star rate={rate} count={count} />
+              <p className="product-data-price">
+                MRP:
+                <del>
+                  <FormatPrice price={price + (price / 2)} />
+                </del>
+              </p>
+              <p className="product-data-price product-data-real-price">
+                Deal of the Day: <FormatPrice price={price} />
+              </p>
+              <p>{description}</p>
+              <div className="product-data-warranty">
+                <div className="product-warranty-data">
+                  <TbTruckDelivery className="warranty-icon" />
+                  <p>Free Delivery</p>
+                </div>
+
+                <div className="product-warranty-data">
+                  <TbReplace className="warranty-icon" />
+                  <p>30 Days Replacement</p>
+                </div>
+
+                <div className="product-warranty-data">
+                  <TbTruckDelivery className="warranty-icon" />
+                  <p>Thapa Delivered </p>
+                </div>
+
+                <div className="product-warranty-data">
+                  <MdSecurity className="warranty-icon" />
+                  <p>2 Year Warranty </p>
+                </div>
+              </div>
+
+              <div className="product-data-info">
+                <p>
+                  Available:
+                  <span> {count > 0 ? "In Stock" : "Not Available"}</span>
+                </p>
+                <p>
+                  ID : <span> {id} </span>
+                </p>
+                <p>
+                  Brand :<span> {category} </span>
+                </p>
+              </div>
+              <hr />
+              {count > 0 && <AddToCart product={singleProduct} />}
+            </div>
+          </div>
+        </Container>
+      </Wrapper>
+    </>
+  );
+};
+
+export default SingleProduct;
 
 // 1. Define an interface for your theme if you haven't already
 // This ensures TypeScript knows what 'theme.colors.btn' and 'theme.media.mobile' are.
-interface MyTheme {
-  colors: {
-    btn: string;
-  };
-  media: {
-    mobile: string;
-  };
-}
+
 
 // 2. Define the Styled Component BEFORE the main component (or use a separate file)
 // This avoids the "Wrapper used before it was defined" error.
-const Wrapper = styled.section<{ theme?: MyTheme }>`
+const Wrapper = styled.section`
   .container {
     padding: 9rem 0;
   }
+    .product_images{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    }
   .product-data {
     display: flex;
     flex-direction: column;
@@ -84,21 +192,3 @@ const Wrapper = styled.section<{ theme?: MyTheme }>`
     padding: 0 2.4rem;
   }
 `;
-
-const SingleProduct = () => {
-  return (
-    <>
-    <Wrapper>
-      {/* Your content goes here */}
-      <div className="container">
-        <div className="product-data">
-          {/* Example content */}
-          SingleProduct
-        </div>
-      </div>
-    </Wrapper>
-    </>
-  );
-};
-
-export default SingleProduct;

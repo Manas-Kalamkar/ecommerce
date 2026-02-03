@@ -1,13 +1,29 @@
-import React from "react";
 import styled from "styled-components";
+import FilterSection from "./components/FilterSection";
+import Sort from "./components/Sort";
+import ProductList from "./components/ProductList";
 
-interface MyTheme {
-  media: {
-    mobile: string
-  }
-}
 
-const Wrapper = styled.section<{ theme: MyTheme }>`
+const Products = () => {
+  return (
+    <Wrapper>
+      <div className="container grid grid-filter-column">
+        <div>
+          <FilterSection />
+        </div>
+        <div>
+          <div className="sort-filter">
+            <Sort />
+          </div>
+          <div className="main-products">
+            <ProductList />
+          </div>
+        </div>
+      </div>
+    </Wrapper>);
+};
+
+const Wrapper = styled.section`
 .grid-filter-column {
   grid-template-columns: 0.2fr 1fr;
   }
@@ -18,11 +34,4 @@ const Wrapper = styled.section<{ theme: MyTheme }>`
       }
       }
       `;
-
-const Products = () => {
-  return (
-  <div>
-    Products
-  </div>);
-};
 export default Products;
