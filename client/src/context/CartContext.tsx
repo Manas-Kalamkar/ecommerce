@@ -21,12 +21,19 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
     const clearCart = () => {
         dispatch({ type: "CLEAR-CART" })
     }
+    const incrementProduct = ({id,amount}:{id:number,amount:number}) => {
+        dispatch({ type: "SET-INCREMENT", payload:{id,amount} })
+    }
+    const decrementProduct = ({id,amount}:{id:number,amount:number}) => {
+        dispatch({ type: "SET-DECREMENT", payload:{id,amount} })
+    }
 
     useEffect(() => {
+        dispatch({type:"CART-ITEM-PRICE-TOTAL"})
         localStorage.setItem("items", JSON.stringify(state.cart))
-    }, [state])
+    }, [state.cart])
 
-    return <CartContext.Provider value={{ ...state, addToCart, removeItem,clearCart }}>
+    return <CartContext.Provider value={{ ...state, addToCart, removeItem,clearCart,incrementProduct,decrementProduct }}>
         {children}
     </CartContext.Provider>
 }

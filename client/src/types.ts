@@ -157,11 +157,16 @@ export type CartActionType =
     | { type: "ADD-TO-CART", payload?: cartEntry }
     | { type: "DELETE-FROM-CART", payload?: number }
     | { type: "CLEAR-CART" }
+    | { type: "SET-INCREMENT" ,payload?: {id:number,amount:number} }
+    | { type: "SET-DECREMENT" ,payload?: {id:number,amount:number} }
+    | { type: "CART-ITEM-PRICE-TOTAL" }
 
 export interface CartContextType extends CartStateType {
     addToCart: ({ id, name, image, amount, price }: cartEntry) => void
     removeItem: (idToDelete: number) => void
     clearCart:()=>void
+    incrementProduct:({id,amount}:{id:number,amount:number})=>void
+    decrementProduct:({id,amount}:{id:number,amount:number})=>void
 }
 
 export type cartEntry = { id: number, name: string, image: string, amount: number, price: number }

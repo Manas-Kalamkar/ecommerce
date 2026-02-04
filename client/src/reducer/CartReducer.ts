@@ -25,7 +25,7 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
 
                 console.log("existingProduct: ", existingProduct);
                 console.log("newCart: ", newCart);
-                return {...state,cart:newCart}
+                return { ...state, cart: newCart }
             } else {
 
                 const cartProduct = { id, name, image, amount, price };
@@ -41,6 +41,70 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
         case "CLEAR-CART":
 
             return { ...state, cart: [] };
+
+
+        case "SET-DECREMENT":
+            let decreProduct = state.cart.map((curElem) => {
+                if (curElem.id === action.payload?.id) {
+                    let decre = curElem.amount - 1;
+                    if (decre <= 1) {
+                        decre = 1;
+                    }
+                    return {
+                        ...curElem,
+                        amount: decre
+                    }
+                }
+                else {
+                    return curElem;
+                }
+            })
+
+            return {
+                ...state,
+                cart: decreProduct
+            }
+
+        case "SET-INCREMENT":
+            let increProduct = state.cart.map((curElem) => {
+                if (curElem.id === action.payload?.id) {
+                    let incre = curElem.amount + 1;
+                    return {
+                        ...curElem,
+                        amount: incre
+                    }
+                }
+                else {
+                    return curElem;
+                }
+            })
+
+            return {
+                ...state,
+                cart: increProduct
+            }
+
+
+        case "CART-ITEM-PRICE-TOTAL":
+            let { total_item, total_amount } = state.cart.reduce(
+                (accu, curElem) => {
+                    let { price, amount } = curElem;
+                    accu.total_item += amount;
+                    accu.total_amount += price * amount;
+                    return accu;
+                }, {
+                total_item: 0,
+                total_amount: 0,
+            }
+            );
+            console.log(total_amount)
+            return {
+                ...state,
+                shipping_fee: total_amount * 0.02,
+                total_item,
+                total_amount
+            }
+
 
         default:
             return state;
