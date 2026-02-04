@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router'
 import { FaCartPlus } from "react-icons/fa";
-import { CgMenu, CgClose, CgCloseR } from "react-icons/cg";
+import { CgMenu, CgClose } from "react-icons/cg";
+import { useCartContext } from '../context/CartContext';
 
 
 const Nav: React.FC = () => {
+
+  const {total_item} = useCartContext();
 
   const [menuIcon, setMenuIcon] = useState(false)
   const Nav = styled.nav`
@@ -192,7 +195,7 @@ const Nav: React.FC = () => {
           <li>
             <NavLink onClick={()=>setMenuIcon(false)} className="navbar-link cart-trolley--link" to="/Cart">
               <FaCartPlus className='cart-trolley' />
-              <span className='cart-total--item'>2</span>
+              <span className='cart-total--item' style={{display:total_item>0?"grid":"none"}}>{total_item > 0 ? total_item:""}</span>
             </NavLink>
           </li>
 
