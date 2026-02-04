@@ -4,14 +4,12 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
     switch (action.type) {
         case "ADD-TO-CART":
             let { id, name, image, amount, price } = action.payload ?? { id: 0, name: "", image: "", amount: 0, price: 0 };
-            console.log("id: ", id, "name: ", name, "image: ", image, "amount: ", amount, "price: ", price);
             let existingProduct = state.cart.find((curElem) => curElem.id === id);
             let newCart;
             if (existingProduct) {
                 newCart = state.cart.map((curElem) => {
                     if (curElem.id == id) {
                         let newAmount = curElem.amount + amount;
-                        console.log("newAmount: ", newAmount)
 
                         return {
                             ...curElem,
@@ -23,8 +21,6 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
 
                 })
 
-                console.log("existingProduct: ", existingProduct);
-                console.log("newCart: ", newCart);
                 return { ...state, cart: newCart }
             } else {
 
@@ -35,7 +31,6 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
 
         case "DELETE-FROM-CART":
             let updateCart = state.cart.filter((curElem) => curElem.id !== action.payload)
-            console.log(updateCart);
             return { ...state, cart: updateCart };
 
         case "CLEAR-CART":
@@ -97,7 +92,6 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
                 total_amount: 0,
             }
             );
-            console.log(total_amount)
             return {
                 ...state,
                 shipping_fee: total_amount * 0.02,

@@ -7,8 +7,7 @@ import { Button } from "../styles/Button";
 const FilterSection = () => {
 
   const { allProducts, filters: { text, category,price }, updateFilterValue, minPrice, maxPrice,toClearFilters } = useFilterContext();
-  console.log("minprice: ", minPrice)
-  console.log("maxPrice: ", maxPrice)
+
 
   const getUniqueData = (data: product[]) => {
     return ["all", ...new Set(data.map(item => item.category))]

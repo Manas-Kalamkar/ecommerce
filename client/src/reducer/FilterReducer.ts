@@ -1,4 +1,4 @@
-import { type product, type FilteredActionType, type FilterStateType, type sort, type FilterUpdate, initialFilteredState} from "../types";
+import { type product, type FilteredActionType, type FilterStateType, type sort, type FilterUpdate, initialFilteredState } from "../types";
 
 const FilterReducer = (state: FilterStateType, action: FilteredActionType): FilterStateType => {
     switch (action.type) {
@@ -20,7 +20,6 @@ const FilterReducer = (state: FilterStateType, action: FilteredActionType): Filt
             return { ...state, grid_view: false, list_view: true }
 
         case "GET_SORT_VALUE":
-            console.log("from filterreducer: ", action.payload)
             return { ...state, get_sort: action?.payload as sort }
 
         case "SET_SORTED_PRODUCT":
@@ -54,7 +53,6 @@ const FilterReducer = (state: FilterStateType, action: FilteredActionType): Filt
         case "UPDATE_FILTER_VALUE":
             let name = action.payload?.name as keyof FilterUpdate;
             let value = action.payload?.value.toUpperCase() as string;
-            console.log(state.filters)
             return { ...state, filters: { ...state.filters, [name]: value } }
 
         case "FILTER_PRODUCT":
@@ -82,7 +80,6 @@ const FilterReducer = (state: FilterStateType, action: FilteredActionType): Filt
             return { ...state, filteredProducts: tempFilterProduct };
 
         case "CLEAR_PRODUCT":
-            console.log("clear");
             return {
                 ...state,
                 filters: initialFilteredState.filters
