@@ -3,6 +3,7 @@ import { useCartContext } from "./context/CartContext";
 import CartItem from "./components/CartItem";
 import { Button } from "./styles/Button";
 import { NavLink } from "react-router";
+import FormatPrice from "./Helpers/FormatPrice";
 
 interface MyTheme {
   colors: {
@@ -14,7 +15,7 @@ interface MyTheme {
 }
 
 const Cart: React.FC = () => {
-  const { total_amount, total_item, cart, clearCart } = useCartContext();
+  const { shipping_fee,total_amount, total_item, cart, clearCart } = useCartContext();
 
   if (cart.length === 0) {
     return (
@@ -52,6 +53,27 @@ const Cart: React.FC = () => {
             <Button>continue Shopping</Button>
           </NavLink>
           <Button className="btn btn-clear" onClick={clearCart} >Clear Cart</Button>
+        </div>
+        <div className="order-total--amount">
+          <div className="order-total--subdata">
+            <div>
+              <p>
+                SubTotal:
+              </p>
+              <p>
+                <FormatPrice price={total_amount} />
+              </p>
+            </div>
+            <div>
+
+              <p>
+                shipping Fee:
+              </p>
+              <p>
+                <FormatPrice price={shipping_fee} />
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Wrapper>
