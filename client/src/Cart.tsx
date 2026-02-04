@@ -15,7 +15,7 @@ interface MyTheme {
 }
 
 const Cart: React.FC = () => {
-  const { shipping_fee,total_amount, total_item, cart, clearCart } = useCartContext();
+  const { shipping_fee, total_amount, cart, clearCart } = useCartContext();
 
   if (cart.length === 0) {
     return (
@@ -28,7 +28,6 @@ const Cart: React.FC = () => {
   }
 
 
-  console.log("total_amount: ", total_amount, "total item: ", total_item, "cart: ", cart)
   return (
 
     <Wrapper>
@@ -58,19 +57,27 @@ const Cart: React.FC = () => {
           <div className="order-total--subdata">
             <div>
               <p>
-                SubTotal:
+                subtotal:
               </p>
               <p>
                 <FormatPrice price={total_amount} />
               </p>
             </div>
             <div>
-
               <p>
                 shipping Fee:
               </p>
               <p>
                 <FormatPrice price={shipping_fee} />
+              </p>
+            </div>
+              <hr />
+            <div>
+              <p>
+                Total:
+              </p>
+              <p>
+                <FormatPrice price={total_amount + shipping_fee} />
               </p>
             </div>
           </div>
