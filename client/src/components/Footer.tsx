@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 import { NavLink } from "react-router";
-import { FaDiscord, FaInstagram, FaYoutube } from "react-icons/fa";
+import {  FaGithub, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -37,17 +37,17 @@ const Footer: React.FC = () => {
             <h3>follow us</h3>
             <div className="footer-social--icons">
               <div>
-                <a href="discord.com" target="_blank">
-                  <FaDiscord className="icons" />
+                <a href="https://www.linkedin.com/in/manas-kalamkar/" target="_blank" rel="noreferrer" >
+                  <FaLinkedin className="icons" />
                 </a>
               </div>
               <div>
-                <a href="youtube.com" target="_blank">
-                  <FaYoutube className="icons" />
+                <a href="https://github.com/Manas-Kalamkar" target="_blank" rel="noreferrer" >
+                  <FaGithub className="icons" />
                 </a>
               </div>
               <div>
-                <a href="instagram.com" target="_blank">
+                <a href="https://www.instagram.com/manas_9.10/" target="_blank" rel="noreferrer" >
                   <FaInstagram className="icons" />
                 </a>
               </div>
