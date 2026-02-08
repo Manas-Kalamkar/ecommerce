@@ -137,12 +137,16 @@ export type CartStateType = {
     shipping_fee: number,
 }
 
-const getLocalCartData = () => {
+const getLocalCartData = ():cartEntry[] => {
     let localCartData: string | null = localStorage.getItem("items");
-    if (localCartData === "") {
+    if (!localCartData) {
         return [];
-    } else {
+    } 
+    try {
         return JSON.parse(localCartData as string)
+    }catch(error){
+        console.error(error);
+        return[];
     }
 }
 
