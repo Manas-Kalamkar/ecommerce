@@ -4,10 +4,11 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
     switch (action.type) {
         case "ADD-TO-CART":
             let { id, name, image, amount, price } = action.payload ?? { id: 0, name: "", image: "", amount: 0, price: 0 };
-            let existingProduct = state.cart.find((curElem) => curElem.id === id);
+            let safeCart = Array.isArray(state.cart) ? state.cart : []
+            let existingProduct = safeCart.find((curElem) => curElem.id === id);
             let newCart;
             if (existingProduct) {
-                newCart = state.cart.map((curElem) => {
+                newCart = safeCart.map((curElem) => {
                     if (curElem.id == id) {
                         let newAmount = curElem.amount + amount;
 
