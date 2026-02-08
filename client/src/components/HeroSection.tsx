@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router'
 import { Button } from '../styles/Button'
-
+import hero from '../assets/images/hero.jpg'
 interface PropType{
     myData:string;
 }
@@ -30,7 +30,7 @@ const name : string = myData;
                     </div>
                     <div className="hero-section-image">
                         <figure>
-                            <img src='/images/hero.jpg' alt="hero-section-photo" className='img-style' />
+                            <img src={hero} alt="hero-section-photo" className='img-style' />
                         </figure>
                     </div>
                 </div>
