@@ -39,7 +39,7 @@ const Nav: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link cart-trolley--link" to="/Cart">
+            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link cart-trolley--link" to="/cart">
               <FaCartPlus className='cart-trolley' />
               <span className='cart-total--item' style={{ display: total_item > 0 ? "grid" : "none" }}>{total_item > 0 ? total_item : ""}</span>
             </NavLink>
