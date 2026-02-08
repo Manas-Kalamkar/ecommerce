@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer, type ReactNode } from "react";
 import axios from 'axios'
 import ProductReducer from "../reducer/ProductReducer";
-import type {  ProductContextType, StateType } from "../types";
+import type {  ProductContextType } from "../types";
 import { initialState } from "../types";
 
 const url = "https://fakestoreapi.com/products/";

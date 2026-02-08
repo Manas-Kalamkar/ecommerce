@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Star = ({ rate, count }:{ rate:number, count:number }) => {
 
-    const ratingStar = Array.from({ length: 5 }, (e,index) => {
+    const ratingStar = Array.from({ length: 5 }, (_,index) => {
         let number = index + 0.5;
         return (
             <span>

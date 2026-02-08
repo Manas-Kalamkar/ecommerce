@@ -9,7 +9,7 @@ import { useCartContext } from '../context/CartContext'
 
 const AddToCart = ({ product }: { product: product }) => {
 
-  const { total_amount, shipping_fee, total_item, cart, addToCart } = useCartContext()
+  const { addToCart } = useCartContext()
 
   const [amount, setAmount] = useState(1);
 
@@ -22,6 +22,7 @@ const AddToCart = ({ product }: { product: product }) => {
   return (
     <Wrapper>
       <CartAmountToggle
+      id={product.id}
         amount={amount}
         setDecrease={setDecrease}
         setIncrease={setIncrease}
