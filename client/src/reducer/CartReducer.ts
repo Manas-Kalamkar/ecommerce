@@ -81,7 +81,8 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
 
 
         case "CART-ITEM-PRICE-TOTAL":
-            let { total_item, total_amount } = state.cart.reduce(
+                const cartArray = Array.isArray(state.cart) ? state.cart : [];
+            let { total_item, total_amount } = cartArray.reduce(
                 (accu, curElem) => {
                     let { price, amount } = curElem;
                     accu.total_item += amount;
