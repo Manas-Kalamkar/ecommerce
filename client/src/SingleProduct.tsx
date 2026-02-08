@@ -18,9 +18,10 @@ const API = "https://fakestoreapi.com/products/"
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct }: ProductContextType = useProductContext();
+  const firstThreeWords = singleProduct.title.split(" ").at(0) +" "+ singleProduct.title.split(" ").at(1) +" "  + singleProduct.title.split(" ").at(2) 
 
   const {
-    id: alias,
+    id: manas,
     title,
     price,
     description,
@@ -40,7 +41,7 @@ const SingleProduct = () => {
   return (
     <>
       <Wrapper>
-        <PageNavigation title={singleProduct.title} />
+        <PageNavigation title={firstThreeWords} />
         {/* Your content goes here */}
         <Container >
           <div className="grid grid-two-column">
@@ -109,12 +110,6 @@ const SingleProduct = () => {
 
 export default SingleProduct;
 
-// 1. Define an interface for your theme if you haven't already
-// This ensures TypeScript knows what 'theme.colors.btn' and 'theme.media.mobile' are.
-
-
-// 2. Define the Styled Component BEFORE the main component (or use a separate file)
-// This avoids the "Wrapper used before it was defined" error.
 const Wrapper = styled.section`
   .container {
     padding: 9rem 0;
@@ -123,7 +118,7 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin:auto;
     }
   .product-data {
     display: flex;
@@ -188,7 +183,26 @@ const Wrapper = styled.section`
     align-items: center;
   }
 
+  @media (max-width: ${({ theme }) => theme?.media?.tab || "768px"}) {
+
+
+    .grid-two-column{
+
+    h2{
+    font-weight:500;
+    font-size:4rem;
+    }
+
+
+    .product_images{
+    scale:0.5;
+    margin-left:-40px
+    }
+    }
+  }
   @media (max-width: ${({ theme }) => theme?.media?.mobile || "768px"}) {
     padding: 0 2.4rem;
+
   }
+
 `;

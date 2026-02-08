@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink } from 'react-router';
 
 import styled from 'styled-components'
@@ -22,6 +21,9 @@ const Wrapper = styled.section`
 
   a {
     font-size: 3.2rem;
+  }
+  @media(max-width: ${({theme})=>theme.media.tab}){
+  font-size:2.5rem;
   }
 `;
 

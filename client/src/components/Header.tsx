@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink } from 'react-router'
 import styled from 'styled-components'
 import Nav from './Nav'
@@ -15,11 +14,20 @@ const Header = () => {
 }
 
 const MainHeader = styled.header`
-padding:0 4.8rem;
-height:10rem;
-background-color:${({ theme }) => theme.colors.bg};
-display:flex;
-justify-content:space-between;
-align-items:center;
-positive:relative;`
+    padding:0 4.8rem;
+    height:10rem;
+    background-color:${({ theme }) => theme.colors.bg};
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    positive:relative;
+
+    @media(max-width:${({theme}) => theme.media.mobile}){
+    img{
+    height:80px;
+    object-fit:cover;
+    }
+    }
+
+`
 export default Header

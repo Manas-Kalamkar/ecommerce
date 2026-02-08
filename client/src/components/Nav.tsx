@@ -8,10 +8,55 @@ import { useCartContext } from '../context/CartContext';
 
 const Nav: React.FC = () => {
 
-  const {total_item} = useCartContext();
+  const { total_item } = useCartContext();
 
   const [menuIcon, setMenuIcon] = useState(false)
-  const Nav = styled.nav`
+    return(
+    <NavWrapper>
+      <div className={menuIcon ? "active navbar" : "navbar"}>
+        <ul className="navbar-lists">
+          <li>
+
+            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link " to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
+
+            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link " to="/about">
+              About
+            </NavLink>
+          </li>
+          <li>
+
+            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link " to="/products">
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link " to="/contact">
+              Contact
+            </NavLink>
+          </li>
+          <li>
+            <NavLink onClick={() => setMenuIcon(false)} className="navbar-link cart-trolley--link" to="/Cart">
+              <FaCartPlus className='cart-trolley' />
+              <span className='cart-total--item' style={{ display: total_item > 0 ? "grid" : "none" }}>{total_item > 0 ? total_item : ""}</span>
+            </NavLink>
+          </li>
+
+          {/* two button for open and close */}
+        </ul>
+      </div>
+      <div className={menuIcon ? "mobile-navbar-btn active" : "mobile-navbar-btn"}>
+        <CgClose name='close-outline' className='mobile-nav-icon close-outline' onClick={() => setMenuIcon(false)} />
+        <CgMenu name='menu-outline' className='mobile-nav-icon' onClick={() => setMenuIcon(true)} />
+      </div>
+    </NavWrapper >
+  )
+}
+
+const NavWrapper = styled.nav`
     .navbar-lists {
       display: flex;
       gap: 4.8rem;
@@ -38,17 +83,15 @@ const Nav: React.FC = () => {
 
     .mobile-navbar-btn {
       display: none;
-      background-color: transparent;
+      background: transparent;
       cursor: pointer;
       border: none;
+      font-size:3.2rem;
     }
 
-    .mobile-nav-icon[name="close-outline"] {
-      display: none;
-    }
 
     .close-outline {
-      display: none;
+      display:none;
     }
 
     .cart-trolley--link {
@@ -85,36 +128,17 @@ const Nav: React.FC = () => {
     }
 
     @media (max-width: ${({ theme }) => theme.media.mobile}) {
-      .mobile-navbar-btn {
-        display: inline-block;
-        z-index: 9999;
-        border: ${({ theme }) => theme.colors.black};
 
-        .mobile-nav-icon {
-          font-size: 4.2rem;
-          color: ${({ theme }) => theme.colors.black};
-        }
+      .navbar {
+        position: relative;
       }
 
-      .active .mobile-nav-icon {
-        display: none;
-        font-size: 4.2rem;
-        position: absolute;
-        top: 30%;
-        right: 10%;
-        color: ${({ theme }) => theme.colors.black};
-        z-index: 9999;
-      }
-
-      .active .close-outline {
-        display: inline-block;
-        position:relative;
-      }
+    
 
       .navbar-lists {
-        width: 100vw;
+        width: 100%;
         height: 100vh;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         background-color: #fff;
@@ -124,90 +148,61 @@ const Nav: React.FC = () => {
         align-items: center;
         flex-direction: column;
 
-        visibility: hidden;
-        opacity: 0;
         transform: translateX(100%);
-        /* transform-origin: top; */
-        transition: all 3s linear;
-      }
+        transition: transform 0.01s ease-in-out;
 
-      .active .navbar-lists {
-        visibility: visible;
-        opacity: 1;
-        transform: translateX(0);
-        z-index: 999;
-        transform-origin: right;
-        transition: all 3s linear;
-
-        .navbar-link {
-          font-size: 4.2rem;
-        }
-      }
-      .cart-trolley--link {
-        position: relative;
-
-        .cart-trolley {
+        .navbar-link  {
+            &:link,
+            &:visited {
+              font-size: 3.2rem;   /* mobile font size */
+              font-weight:600
+            }
+          }
+            
+        
+          
+        .cart-trolley--link {
           position: relative;
-          font-size: 5.2rem;
-        }
 
-        .cart-total--item {
-          width: 4.2rem;
-          height: 4.2rem;
-          font-size: 2rem;
+          .cart-trolley {
+            position: relative;
+            font-size: 4rem;
+          }
+
+          .cart-total--item {
+          font-size:2.5rem;
+            width: 3.4rem;
+            height: 3.4rem;
+            position: absolute;
+            background-color: #000;
+            color: #000;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            top: -30%;
+            left: 70%;
+            background-color: ${({ theme }) => theme.colors.helper};
+          }
         }
       }
+          .active .close-outline{
+          display:inline;
+          position:fixed;
+          z-index:9999
+          }
 
-      .user-logout,
-      .user-login {
-        font-size: 2.2rem;
-        padding: 0.8rem 1.4rem;
-      }
+          .active .navbar-lists {
+            transform: translateX(0);
+            z-index: 999;
+          }
+
+          .mobile-navbar-btn {
+            display: inline-block;
+            z-index: 1000;
+          }
+
     }
-  `;
-  return (
-    <Nav>
-      <div className={menuIcon ? "active navbar":"navbar"}>
-        <ul className="navbar-lists">
-          <li>
 
-            <NavLink onClick={()=>setMenuIcon(false)} className="navbar-link " to="/">
-              Home
-            </NavLink>
-          </li>
-          <li>
-
-            <NavLink onClick={()=>setMenuIcon(false)} className="navbar-link " to="/about">
-              About
-            </NavLink>
-          </li>
-          <li>
-
-            <NavLink onClick={()=>setMenuIcon(false)} className="navbar-link " to="/products">
-              Products
-            </NavLink>
-          </li>
-          <li>
-            <NavLink onClick={()=>setMenuIcon(false)} className="navbar-link " to="/contact">
-              Contact
-            </NavLink>
-          </li>
-          <li>
-            <NavLink onClick={()=>setMenuIcon(false)} className="navbar-link cart-trolley--link" to="/Cart">
-              <FaCartPlus className='cart-trolley' />
-              <span className='cart-total--item' style={{display:total_item>0?"grid":"none"}}>{total_item > 0 ? total_item:""}</span>
-            </NavLink>
-          </li>
-
-          {/* two button for open and close */}
-        </ul>
-      </div>
-      <div className={menuIcon?"mobile-navbar-btn active":"mobile-navbar-btn"}>
-        <CgClose name=' ' className='mobile-nav-icon close-outline'  onClick={()=>setMenuIcon(false)} />
-        <CgMenu name='menu-outline' className='mobile-nav-icon'  onClick={()=>setMenuIcon(true)} />
-      </div>
-    </Nav>
-  )
-}
+`;
 
 export default Nav;

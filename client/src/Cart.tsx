@@ -5,14 +5,6 @@ import { Button } from "./styles/Button";
 import { NavLink } from "react-router";
 import FormatPrice from "./Helpers/FormatPrice";
 
-interface MyTheme {
-  colors: {
-    heading: string;
-  };
-  media: {
-    mobile: string;
-  }
-}
 
 const Cart: React.FC = () => {
   const { shipping_fee, total_amount, cart, clearCart } = useCartContext();
@@ -31,8 +23,9 @@ const Cart: React.FC = () => {
   return (
 
     <Wrapper>
+      <h2 className="common-heading">Cart</h2>
       <div className="container">
-        <div className="cart_heading grid grid-five-column">
+        <div className="table_heading cart_heading grid grid-five-column">
           <p>Item</p>
           <p className="cart-hide">Price</p>
           <p>Quantity</p>
@@ -97,9 +90,12 @@ font-size:4.2rem;
 text-transform:capitalize 
 font-weight:300}`
 
-const Wrapper = styled.section<{ theme?: MyTheme }>`
+const Wrapper = styled.section`
+.common-heading{
+text-align:center;
+margin:4rem
+}
 .container{
-  padding: 9rem 0;
 
   .grid-four-column {
     grid-template-columns: repeat(4, 1fr);
@@ -241,9 +237,16 @@ const Wrapper = styled.section<{ theme?: MyTheme }>`
   }
 
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
+
+    .table_heading  {
+    display:none;
+    }
+
     .grid-five-column {
       grid-template-columns: 1.5fr 1fr 0.5fr;
+      column-gap:8rem;
     }
+    
     .cart-hide {
       display: none;
     }
