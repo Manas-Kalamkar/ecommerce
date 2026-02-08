@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import { ProductContextProvider } from "./context/ProductContext.tsx";
 import { FilterContextProvider } from "./context/FilterContext.tsx";
 import { CartContextProvider } from "./context/CartContext.tsx";
-
+// import reportWebVitals from "./reportWebVitals.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ProductContextProvider>
@@ -17,3 +17,6 @@ createRoot(document.getElementById("root")!).render(
     </ProductContextProvider>
   </StrictMode>,
 );
+
+// checking the performance of the webpages
+// reportWebVitals(console.log);
