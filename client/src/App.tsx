@@ -35,11 +35,10 @@ const Router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "singleproduct/:id", element: <SingleProduct /> },
       { path: "cart", element: <Cart /> },
-      { path: "about", element: <About /> }
     ]
   }
 ],{
-    basename:"/ecommerce"
+    basename:"ecommerce/"
   })
 
 export const theme: DefaultTheme = {
