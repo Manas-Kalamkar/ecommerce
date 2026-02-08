@@ -4,7 +4,7 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
     switch (action.type) {
         case "ADD-TO-CART":
             let { id, name, image, amount, price } = action.payload ?? { id: 0, name: "", image: "", amount: 0, price: 0 };
-            let safeCart = Array.isArray(state.cart) ? state.cart : []
+            let safeCart = Array.isArray(state.cart) ? state.cart : [];
             let existingProduct = safeCart.find((curElem) => curElem.id === id);
             let newCart;
             if (existingProduct) {
@@ -27,11 +27,11 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
 
                 const cartProduct = { id, name, image, amount, price };
 
-                return { ...state, cart: [...state.cart, cartProduct] };
+                return { ...state, cart: [...safeCart, cartProduct] };
             }
 
         case "DELETE-FROM-CART":
-            let updateCart = state.cart.filter((curElem) => curElem.id !== action.payload)
+            let updateCart = Array.isArray(state.cart)? state.cart.filter((curElem) => curElem.id !== action.payload):[];
             return { ...state, cart: updateCart };
 
         case "CLEAR-CART":
@@ -40,7 +40,7 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
 
 
         case "SET-DECREMENT":
-            let decreProduct = state.cart.map((curElem) => {
+            let decreProduct = Array.isArray(state.cart) ? state.cart.map((curElem) => {
                 if (curElem.id === action.payload?.id) {
                     let decre = curElem.amount - 1;
                     if (decre <= 1) {
@@ -54,7 +54,7 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
                 else {
                     return curElem;
                 }
-            })
+            }) : [];
 
             return {
                 ...state,
@@ -62,7 +62,7 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
             }
 
         case "SET-INCREMENT":
-            let increProduct = state.cart.map((curElem) => {
+            let increProduct = Array.isArray(state.cart) ? state.cart.map((curElem) => {
                 if (curElem.id === action.payload?.id) {
                     let incre = curElem.amount + 1;
                     return {
@@ -73,7 +73,7 @@ const CartReducer = (state: CartStateType, action: CartActionType): CartStateTyp
                 else {
                     return curElem;
                 }
-            })
+            }):[];
 
             return {
                 ...state,
