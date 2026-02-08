@@ -9,7 +9,8 @@ import FormatPrice from "./Helpers/FormatPrice";
 const Cart: React.FC = () => {
   const { shipping_fee, total_amount, cart, clearCart } = useCartContext();
 
-  if (cart.length === 0) {
+  const safeCart = Array.isArray(cart) ? cart : [];
+  if (safeCart.length === 0) {
     return (
       <EmptyDiv>
         <h3>
@@ -35,7 +36,7 @@ const Cart: React.FC = () => {
         <hr />
 
         <div className="cart-item">
-          {cart.map((curElem) => {
+          {safeCart.map((curElem) => {
             return <CartItem key={curElem.id} {...curElem} />;
           })}
         </div>
