@@ -21,7 +21,7 @@ const SingleProduct = () => {
   const firstThreeWords = singleProduct.title.split(" ").at(0) +" "+ singleProduct.title.split(" ").at(1) +" "  + singleProduct.title.split(" ").at(2) 
 
   const {
-    id: manas,
+    id,
     title,
     price,
     description,
@@ -31,9 +31,9 @@ const SingleProduct = () => {
 
   }: product = singleProduct;
 
-  const { id } = useParams();
+  const idNew = useParams().id;
   useEffect(() => {
-    getSingleProduct(`${API}/${id}`)
+    getSingleProduct(`${API}/${idNew}`)
   }, [])
 
   if (isSingleLoading) { return (<div>...Loading...</div>) }
