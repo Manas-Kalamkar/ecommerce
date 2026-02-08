@@ -25,7 +25,6 @@ const AppLayout = () => {
 
 const Router = createBrowserRouter([
   {
-    path: "/",
     element: <AppLayout />,
     errorElement: <ErrorPage />,
     children: [
@@ -38,7 +37,7 @@ const Router = createBrowserRouter([
     ]
   }
 ],{
-    basename:"/ecommerce"
+    basename:"/ecommerce/"
   })
 
 export const theme: DefaultTheme = {
