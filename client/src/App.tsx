@@ -38,7 +38,7 @@ const Router = createBrowserRouter([
     ]
   }
 ],{
-    basename:"ecommerce/"
+    basename:"/ecommerce"
   })
 
 export const theme: DefaultTheme = {
