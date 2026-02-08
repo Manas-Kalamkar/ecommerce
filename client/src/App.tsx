@@ -38,7 +38,9 @@ const Router = createBrowserRouter([
       { path: "about", element: <About /> }
     ]
   }
-])
+],{
+    basename:"/ecommerce"
+  })
 
 export const theme: DefaultTheme = {
   colors: {
