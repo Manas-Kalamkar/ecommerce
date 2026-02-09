@@ -213,7 +213,7 @@ const Wrapper = styled.section`
     max-width: 110%;
   }
 
-  .product-data,.product-data-info {
+  .product-data {
     width: 90%;
     font-size:8rem;
     margin: 0 auto;
