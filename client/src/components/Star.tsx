@@ -63,9 +63,10 @@ const Star = ({ rate, count }:{ rate:number, count:number }) => {
 const Wrapper = styled.section`
   .icon-style {
     display: flex;
-    gap: 0.2rem;
+    gap: 0.9rem;
     align-items: center;
     justify-content: flex-start;
+    font-size:2rem;
 
     .icon {
       font-size: 2rem;
