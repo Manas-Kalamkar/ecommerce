@@ -50,7 +50,7 @@ const SingleProduct = () => {
               <MyImage imgs={image} />
             </div>
 
-            {/* product dAta  */}
+            {/* product data  */}
             <div className="product-data">
               <h2>{title}</h2>
               <Star rate={rate} count={count} />
@@ -63,7 +63,7 @@ const SingleProduct = () => {
               <p className="product-data-price product-data-real-price">
                 Deal of the Day: <FormatPrice price={price} />
               </p>
-              <p>{description}</p>
+              <p className="product-data-description">{description}</p>
               <div className="product-data-warranty">
                 <div className="product-warranty-data">
                   <TbTruckDelivery className="warranty-icon" />
@@ -77,7 +77,7 @@ const SingleProduct = () => {
 
                 <div className="product-warranty-data">
                   <TbTruckDelivery className="warranty-icon" />
-                  <p>Thapa Delivered </p>
+                  <p>Next Day Delivered </p>
                 </div>
 
                 <div className="product-warranty-data">
@@ -125,7 +125,7 @@ const Wrapper = styled.section`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 2rem;
+    gap: 4rem;
 
     .product-data-warranty {
       width: 100%;
@@ -177,16 +177,14 @@ const Wrapper = styled.section`
     }
   }
 
-  .product-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
   @media (max-width: ${({ theme }) => theme?.media?.tab || "768px"}) {
 
 
     .grid-two-column{
+    grid-template-column:1fr;
+    
+}
 
     h2{
     font-weight:500;
@@ -195,14 +193,34 @@ const Wrapper = styled.section`
 
 
     .product_images{
-    scale:0.5;
-    margin-left:-40px
+    max-width:40rem;
     }
     }
-  }
+  
   @media (max-width: ${({ theme }) => theme?.media?.mobile || "768px"}) {
-    padding: 0 2.4rem;
+  padding: 0 0.4rem;
 
+
+  .product_images {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:auto;
+  max-width:70vw; 
   }
+
+  .product_images img {
+    max-width: 110%;
+  }
+
+  .product-data,.product-data-info {
+    width: 90%;
+    font-size:8rem;
+    margin: 0 auto;
+  }
+  .product-data-description,.product-data-price{
+  font-size:2.4rem;}
+}
+
 
 `;
